@@ -1,5 +1,5 @@
 ﻿namespace AsoiafKindleDict.Api.Dto;
-class CoverPageDto {
+public class CoverPageDto {
     public string Title { get; set; }
     public string Author { get; set; }
 

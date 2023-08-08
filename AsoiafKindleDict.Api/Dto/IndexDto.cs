@@ -1,9 +1,18 @@
 ﻿using System.Text;
 
 namespace AsoiafKindleDict.Api.Dto;
-class IndexDto {
+public class IndexDto {
+    public IndexDto() { }
+
+    public IndexDto(string name) {
+        Name = name;
+    }
     public String Name { get; set; }
     public HashSet<WordDefinitionDto> WordDefinitions { get; set; } = new();
+
+    public void AddWord(string word, string definition) {
+        WordDefinitions.Add(new WordDefinitionDto(word, definition));
+    }
 
     public string ToHtml() {
         var builder = new StringBuilder();

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace AsoiafKindleDict.Api.Dto;
-class WordDefinitionDto {
+public class WordDefinitionDto {
     public WordDefinitionDto() { }
     public WordDefinitionDto(string word, string definition) {
         Word = word;
@@ -33,7 +33,7 @@ class WordDefinitionDto {
         }
 
         builder.AppendLine($"<dd>{Definition}</dd>");
-        builder.AppendLine("<idx:entry>");
+        builder.AppendLine("</idx:entry>");
 
         return builder.ToString();
     }

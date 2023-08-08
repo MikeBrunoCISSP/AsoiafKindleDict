@@ -1,10 +1,25 @@
 ﻿using System.Text;
 
 namespace AsoiafKindleDict.Api.Dto;
-class DictionaryDto {
+public class DictionaryDto {
+    public DictionaryDto() { }
+
+    public DictionaryDto(String title, String owner, String author = "") {
+        CopyRight = new CopyrightDto {
+            Owner = owner
+        };
+        CoverPage = new CoverPageDto {
+            Title = title,
+            Author = String.IsNullOrEmpty(author) ? owner : author
+        };
+    }
     public CopyrightDto CopyRight { get; set; } = new();
     public CoverPageDto CoverPage { get; set; } = new();
     public HashSet<IndexDto> Indexes { get; set; } = new();
+
+    public void AddIndex(IndexDto index) {
+        Indexes.Add(index);
+    }
 
     public void CreateArtifacts(string outputDirectory) {
         if (string.IsNullOrEmpty(outputDirectory)) {

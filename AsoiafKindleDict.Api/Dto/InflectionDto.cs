@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace AsoiafKindleDict.Api.Dto;
-class InflectionDto {
+public class InflectionDto {
     public InflectionDto() { }
     public InflectionDto(string name, string value, bool isExactMatch = false) {
         Name = name;

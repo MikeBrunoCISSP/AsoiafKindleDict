@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace AsoiafKindleDict.Api.Dto;
-class InflectionGroupDto {
+public class InflectionGroupDto {
     public InflectionGroupDto() { }
     public InflectionGroupDto(string name) {
         Name = name;
