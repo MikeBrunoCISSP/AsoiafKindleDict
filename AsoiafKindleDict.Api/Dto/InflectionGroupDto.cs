@@ -15,7 +15,7 @@ public class InflectionGroupDto {
     }
 
     public override int GetHashCode() {
-        return Name.ToUpper().GetHashCode();
+        return StringComparer.InvariantCultureIgnoreCase.GetHashCode(Name);
     }
 
     public string ToHtml() {

@@ -26,7 +26,7 @@ public class InflectionDto {
         return !ReferenceEquals(null, obj) && ReferenceEquals(this, obj) || (obj is InflectionDto other && equals(other));
     }
     public override int GetHashCode() {
-        return Value.ToUpper().GetHashCode();
+        return StringComparer.InvariantCultureIgnoreCase.GetHashCode(Value);
     }
     public string ToHtml() {
         var builder = new StringBuilder("<idx:iform ");

@@ -25,7 +25,7 @@ public class IndexDto {
         return !ReferenceEquals(null, obj) && (ReferenceEquals(this, obj) || (obj is IndexDto other && equals(other)));
     }
     public override int GetHashCode() {
-        return Name.ToUpper().GetHashCode();
+        return StringComparer.InvariantCultureIgnoreCase.GetHashCode(Name);
     }
 
     protected bool equals(IndexDto other) {

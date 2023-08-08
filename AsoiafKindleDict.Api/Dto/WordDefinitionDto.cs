@@ -17,7 +17,7 @@ public class WordDefinitionDto {
     }
 
     public override int GetHashCode() {
-        return Word.ToUpper().GetHashCode();
+        return StringComparer.InvariantCultureIgnoreCase.GetHashCode(Word);
     }
 
     public string ToHtml(string indexName) {
