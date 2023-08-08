@@ -1,4 +1,4 @@
-using AsoiafKindleDict.Api.Dto;
+using AsoiafKindleDict.WebContract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests;

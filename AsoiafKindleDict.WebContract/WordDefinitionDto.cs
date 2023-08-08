@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace AsoiafKindleDict.Api.Dto;
+namespace AsoiafKindleDict.WebContract;
 public class WordDefinitionDto {
     public WordDefinitionDto() { }
     public WordDefinitionDto(string word, string definition) {

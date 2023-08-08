@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace AsoiafKindleDict.Api.Dto;
+namespace AsoiafKindleDict.WebContract;
 public class InflectionDto {
     public InflectionDto() { }
     public InflectionDto(string name, string value, bool isExactMatch = false) {

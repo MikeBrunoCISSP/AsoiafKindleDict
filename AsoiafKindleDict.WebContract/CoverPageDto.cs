@@ -1,4 +1,4 @@
-﻿namespace AsoiafKindleDict.Api.Dto;
+﻿namespace AsoiafKindleDict.WebContract;
 public class CoverPageDto {
     public string Title { get; set; }
     public string Author { get; set; }

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AsoiafKindleDict.Api\AsoiafKindleDict.Api.csproj" />
+    <ProjectReference Include="..\AsoiafKindleDict.WebContract\AsoiafKindleDict.WebContract.csproj" />
   </ItemGroup>
 
 </Project>

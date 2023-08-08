@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace AsoiafKindleDict.Api.Dto;
+namespace AsoiafKindleDict.WebContract;
 public class DictionaryDto {
     public DictionaryDto() { }
 
@@ -40,16 +40,19 @@ public class DictionaryDto {
 
         var referenceBuilder = new StringBuilder();
         var contentBuilder = new StringBuilder();
+        var spineBuilder = new StringBuilder();
         foreach (var index in Indexes.Values) {
             referenceBuilder.AppendLine($"        <reference type=\"index\" title=\"{index.Name}\" href=\"{index.Name}.html\"/>");
             contentBuilder.AppendLine($"        <item id=\"{index.Name}\"\r\n                  href=\"{index.Name}.html\"\r\n                  media-type=\"application/xhtml+xml\" />");
+            spineBuilder.AppendLine($"		<itemref idref=\"{index.Name}\"/>");
             string indexContents = File.ReadAllText(@"Templates\contentTemplate.html").Replace("[WORDS]", index.ToHtml());
             File.WriteAllText(Path.Combine(payloadFolder, $"{index.Name}.html"), indexContents);
         }
 
         string opfContents = File.ReadAllText(@"Templates\opfTemplate.xml")
             .Replace("[REFERENCE]", referenceBuilder.ToString())
-            .Replace("[CONTENT]", contentBuilder.ToString());
+            .Replace("[CONTENT]", contentBuilder.ToString())
+            .Replace("[SPINE]", spineBuilder.ToString());
         File.WriteAllText(Path.Combine(payloadFolder, "dict.opf"), opfContents);
     }
 }

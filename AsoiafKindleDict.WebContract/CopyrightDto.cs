@@ -1,4 +1,4 @@
-﻿namespace AsoiafKindleDict.Api.Dto;
+﻿namespace AsoiafKindleDict.WebContract;
 public class CopyrightDto {
     public string Owner { get; set; }
 

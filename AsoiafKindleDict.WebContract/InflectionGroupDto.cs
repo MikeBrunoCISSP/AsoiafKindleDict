@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace AsoiafKindleDict.Api.Dto;
+namespace AsoiafKindleDict.WebContract;
 public class InflectionGroupDto {
     public InflectionGroupDto() { }
     public InflectionGroupDto(string name) {
