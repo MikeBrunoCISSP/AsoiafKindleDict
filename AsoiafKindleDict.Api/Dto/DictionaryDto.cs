@@ -15,12 +15,15 @@ public class DictionaryDto {
     }
     public CopyrightDto CopyRight { get; set; } = new();
     public CoverPageDto CoverPage { get; set; } = new();
-    public HashSet<IndexDto> Indexes { get; set; } = new();
+    public Dictionary<string, IndexDto> Indexes { get; set; } = new(StringComparer.InvariantCultureIgnoreCase);
 
-    public void AddIndex(IndexDto index) {
-        Indexes.Add(index);
+    public void AddWord(string word, string definition, string indexName) {
+        if (!Indexes.ContainsKey(indexName)) {
+            Indexes.Add(indexName, new IndexDto(indexName));
+        }
+
+        Indexes[indexName].AddWord(word, definition);
     }
-
     public void CreateArtifacts(string outputDirectory) {
         if (string.IsNullOrEmpty(outputDirectory)) {
             throw new ArgumentNullException(nameof(outputDirectory));
@@ -37,7 +40,7 @@ public class DictionaryDto {
 
         var referenceBuilder = new StringBuilder();
         var contentBuilder = new StringBuilder();
-        foreach (var index in Indexes) {
+        foreach (var index in Indexes.Values) {
             referenceBuilder.AppendLine($"        <reference type=\"index\" title=\"{index.Name}\" href=\"{index.Name}.html\"/>");
             contentBuilder.AppendLine($"        <item id=\"{index.Name}\"\r\n                  href=\"{index.Name}.html\"\r\n                  media-type=\"application/xhtml+xml\" />");
             string indexContents = File.ReadAllText(@"Templates\contentTemplate.html").Replace("[WORDS]", index.ToHtml());

@@ -9,16 +9,7 @@ public class WordDefinitionDto {
     }
     public string Word { get; set; }
     public string Definition { get; set; }
-    public HashSet<InflectionGroupDto> InflectionGroups { get; set; } = new();
-
-    public override bool Equals(object obj) {
-        return !ReferenceEquals(null, obj) && ReferenceEquals(this, obj) ||
-               (obj is WordDefinitionDto other && equals(other));
-    }
-
-    public override int GetHashCode() {
-        return StringComparer.InvariantCultureIgnoreCase.GetHashCode(Word);
-    }
+    public Dictionary<string, InflectionGroupDto> InflectionGroups { get; set; } = new(StringComparer.InvariantCultureIgnoreCase);
 
     public string ToHtml(string indexName) {
         var builder = new StringBuilder($"<idx:entry name=\"{indexName}\" scriptable=\"yes\" spell=\"yes\">\r\n");
@@ -26,7 +17,7 @@ public class WordDefinitionDto {
             builder.AppendLine($"<h5><dt><idx:orth>{Word}</idx:orth></dt></h5>");
         } else {
             builder.AppendLine($"<h5><dt><idx:orth>{Word}");
-            foreach (var inflectionGroup in InflectionGroups) {
+            foreach (var inflectionGroup in InflectionGroups.Values) {
                 builder.AppendLine(inflectionGroup.ToHtml());
             }
             builder.AppendLine("</idx:orth></dt></h5>");
@@ -36,9 +27,5 @@ public class WordDefinitionDto {
         builder.AppendLine("</idx:entry>");
 
         return builder.ToString();
-    }
-
-    protected bool equals(WordDefinitionDto other) {
-        return Word.Equals(other.Word, StringComparison.InvariantCultureIgnoreCase);
     }
 }

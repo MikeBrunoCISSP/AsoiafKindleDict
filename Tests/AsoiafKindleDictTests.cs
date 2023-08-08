@@ -6,17 +6,11 @@ namespace Tests;
 public class AsoiafKindleDictTests {
     [TestMethod]
     public void TestCreateDictionary() {
-        var characterIndex = new IndexDto("Characters");
-        characterIndex.AddWord("Tywin Lannister", "Lord of Casterly Rock");
-        characterIndex.AddWord("Daenerys Targaryen", "The stormborn");
-
-        var locationIndex = new IndexDto("Locations");
-        locationIndex.AddWord("Winterfell", "Seat of House Stark");
-        locationIndex.AddWord("Highgarden", "Seat of House Tyrell");
-
         var dictionary = new DictionaryDto("A Song of Ice and Fire Kindle Dictionary", "Mike Bruno");
-        dictionary.AddIndex(characterIndex);
-        dictionary.AddIndex(locationIndex);
+        dictionary.AddWord("Tywin Lannister", "Lord of Casterly Rock", "Characters");
+        dictionary.AddWord("Daenerys Targaryen", "The stormborn", "Characters");
+        dictionary.AddWord("Winterfell", "Seat of House Stark", "Locations");
+        dictionary.AddWord("Highgarden", "Seat of House Tyrell", "Locations");
         dictionary.CreateArtifacts(@"P:\_temp");
     }
 }

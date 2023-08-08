@@ -22,12 +22,6 @@ public class InflectionDto {
     /// </summary>
     public Boolean IsExactMatch { get; set; }
 
-    public override bool Equals(object obj) {
-        return !ReferenceEquals(null, obj) && ReferenceEquals(this, obj) || (obj is InflectionDto other && equals(other));
-    }
-    public override int GetHashCode() {
-        return StringComparer.InvariantCultureIgnoreCase.GetHashCode(Value);
-    }
     public string ToHtml() {
         var builder = new StringBuilder("<idx:iform ");
         if (!String.IsNullOrEmpty(Name)) {
@@ -40,9 +34,5 @@ public class InflectionDto {
         builder.Append("/>");
 
         return builder.ToString();
-    }
-
-    protected bool equals(InflectionDto other) {
-        return Value.Equals(other.Value, StringComparison.InvariantCultureIgnoreCase);
     }
 }
