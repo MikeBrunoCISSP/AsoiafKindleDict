@@ -3,27 +3,23 @@
 namespace AsoiafKindleDict.Api.Dto;
 class IndexDto {
     public String Name { get; set; }
-    public Dictionary<string, string> Words { get; set; } = new();
+    public HashSet<WordDefinitionDto> WordDefinitions { get; set; } = new();
 
     public string ToHtml() {
         var builder = new StringBuilder();
-        foreach (var word in Words) {
-            builder.AppendLine(GetWordHtml(word));
+        foreach (var wordDefinition in WordDefinitions) {
+            builder.AppendLine(wordDefinition.ToHtml(Name));
         }
-        return builder.ToString();
+        return File.ReadAllText(@"Templates\contentTemplate.html").Replace("[WORDS]", builder.ToString());
+    }
+    public override bool Equals(object? obj) {
+        return !ReferenceEquals(null, obj) && (ReferenceEquals(this, obj) || (obj is IndexDto other && equals(other)));
+    }
+    public override int GetHashCode() {
+        return Name.ToUpper().GetHashCode();
     }
 
-    public string? GetWordHtml(string word) {
-        return Words.ContainsKey(word)
-            ? $"      <idx:entry name=\"{Name}\" scriptable=\"yes\" spell=\"yes\">\r\n          <h5><dt><idx:orth>{word}</idx:orth></dt></h5>\r\n          <dd>{Words[word]}</dd>\r\n      </idx:entry>\r\n      <hr/>"
-            : null;
-    }
-
-    public string GetWordHtml(KeyValuePair<string, string> word) => $"      <idx:entry name=\"{Name}\" scriptable=\"yes\" spell=\"yes\">\r\n          <h5><dt><idx:orth>{word.Key}</idx:orth></dt></h5>\r\n          <dd>{word.Value}</dd>\r\n      </idx:entry>\r\n      <hr/>";
-
-    public string? GetDefinition(string word) {
-        return Words.ContainsKey(word)
-            ? Words[word]
-            : null;
+    protected bool equals(IndexDto other) {
+        return Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase);
     }
 }

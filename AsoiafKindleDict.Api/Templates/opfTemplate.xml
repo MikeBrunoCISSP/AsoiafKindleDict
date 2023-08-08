@@ -22,9 +22,7 @@
 		<item id="copyright"
 		      href="copyright.html"
 		      media-type="application/xhtml+xml" />
-		<item id="content"
-		      href="content.html"
-		      media-type="application/xhtml+xml" />
+		[CONTENT]
 	</manifest>
 	<spine>
 		<itemref idref="cover" />
@@ -33,6 +31,7 @@
 		<itemref idref="content"/>
 	</spine>
 	<guide>
-		<reference type="index" title="IndexName" href="content.html"/>
+        [REFERENCE]
+		<!--<reference type="index" title="IndexName" href="content.html"/>-->
 	</guide>
 </package>
